@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Lembrete de Leitura de Livros</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h2>Meus Livros</h2>
+        </div><!--// .col-md-6 -->
+      </div><!--// .row -->
+
+      <div class="row">
+        <div class="col-md-6">
+          <table id="tabelaLivro" class="table table-bordered table-condensed table-striped">
+            <thead>
+              <tr>
+                <th>Título do Livro</th>
+                <th>Quantidade de Páginas</th>
+                <th>Editar</th>
+                <th>Deletar</th>
+              </tr>
+            </thead>
+          </table>
+        </div><!--// .col-md-6 -->
+
+        <div class="col-md-6">
+          <div class="panel panel-primary">
+            <div class="panel-heading">Dados do Livro</div>
+            <div class="panel-body">
+              <form>
+                <div class="form-group">
+                  <label for="title">Título</label>
+                  <input type="text" name="title" id="titulo_livro" class="form-control input-lg" placeholder="Título do Livro">
+                </div>
+
+                <div class="form-group">
+                  <label for="paginas">Páginas</label>
+                  <input type="text" name="paginas" id="paginas_livro" class="form-control input-lg" placeholder="Quantidade de Páginas">
+                </div>
+
+                <div class="form-group">
+                  <label for="exampleInputFile">Anexar Imagem do Livro</label>
+                  <input type="file" id="exampleInputFile">
+                </div>
+
+                <div class="form-group">
+                  <button type="button" id="botaoAtualizar" onclick="atualizarLivro();" class="btn btn-lg btn-primary">
+                    Adicionar Livro
+                  </button>
+                </div>
+
+              </form>
+            </div>
+          </div><!--// .panel -->
+        </div><!--// .col-md -->
+      </div><!--// .row -->
+    </div><!--// .container -->
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+
+  </body>
+</html>
