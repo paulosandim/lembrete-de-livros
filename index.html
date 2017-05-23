@@ -88,8 +88,25 @@
       //  Adcionando Livro na Tabela
       $("#tabelaLivro tbody").append(criarLinhaNaTabelaLivro(_nextId));
 
-      //Incrementando o nextId
+      //  Incrementando o nextId
       _nextId += 1;
+    }
+
+    function deletarLivro(botao_deletar)  {
+      $(botao_deletar).parents("tr").remove();
+    }
+
+    function editarLivro(botao_editar)  {
+      var row = $(botao_editar).parents("tr");
+      var cols = row.children("td");
+
+      _activeId = $($(cols[2]).children("button")[0]).data("id");
+
+      $("#titulo_livro").val($(cols[0]).text());
+      $("#paginas_livro").val($(cols[1]).text());
+
+      //  Muda o nome do botão para Atualizar
+      $("#botaoAtualizar").text("Atualizar");
     }
 
     </script>
