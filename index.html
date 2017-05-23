@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -28,6 +28,7 @@
 
       <div class="row">
         <div class="col-md-6">
+        <div class="panel panel-primary">
           <table id="tabelaLivro" class="table table-bordered table-condensed table-striped">
             <thead>
               <tr>
@@ -38,11 +39,12 @@
               </tr>
             </thead>
           </table>
+          </div><!--// .panel-->
         </div><!--// .col-md-6 -->
 
         <div class="col-md-6">
           <div class="panel panel-primary">
-            <div class="panel-heading">Dados do Livro</div>
+            <div class="panel-heading"><strong>Dados do Livro</strong></div>
             <div class="panel-body">
               <form>
                 <div class="form-group">
@@ -55,19 +57,15 @@
                   <input type="text" name="paginas" id="paginas_livro" class="form-control input-lg" placeholder="Quantidade de Páginas">
                 </div>
 
-                <div class="row">
-                        <div class='col-sm-6'>
-                            <div class="form-group">
-                            <label>Lembrete</label>
-                                <div class='input-group date' id='datetimepicker2'>
-                                    <input type='text' class="form-control" />
-                                    <span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-calendar"></span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                  </div>
+                <div class="form-group">
+                  <label for="lembrete">Lembrete</label>
+                <div class='input-group date' id='datetimepicker2'>
+                    <input type='text' name="lembrete" class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+                </div>
 
                 <div class="form-group">
                   <label for="exampleInputFile">Anexar Imagem do Livro</label>
@@ -104,6 +102,13 @@
       $("#titulo_livro").val("");
       $("#paginas_livro").val("");
     }
+
+    // Calendário para Lembretes
+    $(function () {
+                $('#datetimepicker2').datetimepicker({
+                    locale: 'pt-BR'
+                });
+            });
 
     function criarLinhaNaTabelaLivro(id)  {
       var row = "<tr>" +
