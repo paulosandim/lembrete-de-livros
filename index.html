@@ -79,6 +79,17 @@
     <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript">
 
+    // Próximo ID para adicionar um novo livro
+    var _nextId = 1;
+    //  ID do livro que está sendo editado
+    var _activeId = 0;
+
+    // Função que limpa os campos
+    function limpaCampo() {
+      $("#titulo_livro").val("");
+      $("#paginas_livro").val("");
+    }
+
     function adicionarLivroNaTabela() {
       //  Primeiro verifica se <tbody> existe. Adiciona um caso não exista
       if ($("#tabelaLivro tbody").length == 0) {
