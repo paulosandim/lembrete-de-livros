@@ -90,6 +90,31 @@
       $("#paginas_livro").val("");
     }
 
+    function criarLinhaNaTabelaLivro(id)  {
+      var row = "<tr>" +
+      "<td>" + $("#titulo_livro").val() + "</td>" +
+      "<td>" + $("#paginas_livro").val() + "</td>" +
+      "<td>" +
+      "<button type='button' " +
+              "onclick='editarLivro(this);' " +
+              "class='btn btn-default'" +
+              "data-id='" + id + "'>" +
+              "<span class='glyphicon glyphicon-edit'></span>" +
+            "</button>" +
+          "</td>" +
+          "<td>" +
+            "<button type='button' " +
+              "onclick='deletarLivro(this);' " +
+              "class='btn btn-default'" +
+              "data-id='" + id + "'>" +
+              "<span class='glyphicon glyphicon-remove'></span>" +
+            "</button>" +
+          "</td>" +
+        "</tr>"
+
+        return row;
+    }
+
     function adicionarLivroNaTabela() {
       //  Primeiro verifica se <tbody> existe. Adiciona um caso não exista
       if ($("#tabelaLivro tbody").length == 0) {
