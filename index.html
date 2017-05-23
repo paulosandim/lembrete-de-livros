@@ -77,6 +77,21 @@
     <script src="js/jquery-3.2.1.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript">
 
+    function adicionarLivroNaTabela() {
+      //  Primeiro verifica se <tbody> existe. Adiciona um caso não exista
+      if ($("#tabelaLivro tbody").length == 0) {
+        $("#tabelaLivro").append("<tbody></tbody>");
+      }
+
+      //  Adcionando Livro na Tabela
+      $("#tabelaLivro tbody").append(criarLinhaNaTabelaLivro(_nextId));
+
+      //Incrementando o nextId
+      _nextId += 1;
+    }
+
+    </script>
   </body>
 </html>
