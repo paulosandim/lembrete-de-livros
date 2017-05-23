@@ -105,8 +105,38 @@
       $("#titulo_livro").val($(cols[0]).text());
       $("#paginas_livro").val($(cols[1]).text());
 
-      //  Muda o nome do botão para Atualizar
+      //  Muda o nome do botão para poder atualizar
       $("#botaoAtualizar").text("Atualizar");
+    }
+
+    function atualizarLivroNaTabela(id) {
+      // Achar o livro na tabela
+      var row = $("#tabelaLivro button[data-id='" + id + "']").parents("tr")[0];
+
+      // Adiciona uma nova linha e modifica na tabela
+      $(row).after(criarLinhaNaTabelaLivro());
+
+      $(row).remove();
+
+      limpaCampo();
+
+      //  O botão precisa voltar a ser para adicionar
+      $("#botaoAtualizar").text("Adicionar Livro");
+    }
+
+    function atualizarLivro() {
+      if ($("#titulo_livro").val() != null && $("#titulo_livro").val() != '') {
+        if ($("#botaoAtualizar").text() == "Atualizar") {
+          atualizarLivroNaTabela(_activeId);
+        } else {
+          adicionarLivroNaTabela();
+        }
+
+        limpaCampo();
+
+        // Deixei o campo Título como foco
+        $("#titulo_livro").focus();
+      }
     }
 
     </script>
