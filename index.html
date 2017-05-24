@@ -193,11 +193,20 @@
     }
 
     function deletarLocalStorage()  {
-      if (localStorage.getItem('livros')) {
 
-          localStorage.removeItem('livros');
-          atualizarLivroNaTabela();
+      livros = JSON.parse(localStorage.getItem('livros'))
+
+       livros.forEach(function(livro) {
+
+        $("#tabelaLivro tbody").append(criarLinhaNaTabelaLivro(livro.id, livro.titulo, livro.paginas));
+
+        if (localStorage.getItem("livro")) {
+          localStorage.removeItem("livro");
+          adicionarLivroNaTabela()
         }
+
+        _nextId += 1;
+          });
     }
 
     function deletarLivro(botao_deletar)  {
