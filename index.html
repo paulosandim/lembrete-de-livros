@@ -192,10 +192,20 @@
       _nextId += 1;
     }
 
+    function deletarLocalStorage()  {
+      if (localStorage.getItem('livros')) {
+
+          localStorage.removeItem('livros');
+          atualizarLivroNaTabela();
+        }
+    }
 
     function deletarLivro(botao_deletar)  {
       $(botao_deletar).parents("tr").remove();
+
+      deletarLocalStorage();
     }
+
 
     function editarLivro(botao_editar)  {
       var row = $(botao_editar).parents("tr");
