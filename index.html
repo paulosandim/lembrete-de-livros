@@ -18,6 +18,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
+
   <body>
 
     <div class="container">
@@ -99,7 +100,6 @@
     var _nextId = 1;
 
     $(document).ready(function() {
-
 
     var livros = JSON.parse(localStorage.getItem('livros')) || [];
 
@@ -191,6 +191,7 @@
       //  Incrementando o nextId
       _nextId += 1;
     }
+
 
     function deletarLivro(botao_deletar)  {
       $(botao_deletar).parents("tr").remove();
