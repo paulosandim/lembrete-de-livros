@@ -113,7 +113,9 @@
 
         _nextId += 1;
           });
+
         };
+
       });
 
     //  ID do livro que está sendo editado
@@ -192,21 +194,21 @@
       _nextId += 1;
     }
 
-    function deletarLocalStorage()  {
+    function deletarLocalStorage(data_id) {
+      var new_array = [];
+      livros = JSON.parse(localStorage.getItem('livros'));
 
-      livros = JSON.parse(localStorage.getItem('livros'))
+      for(var i = 0; i <= livros.length; i++)  {
+        console.log(livros[0])
 
-       livros.forEach(function(livro) {
-
-        $("#tabelaLivro tbody").append(criarLinhaNaTabelaLivro(livro.id, livro.titulo, livro.paginas));
-
-        if (localStorage.getItem("livro")) {
-          localStorage.removeItem("livro");
-          adicionarLivroNaTabela()
+        if (livros[i].id == data_id) {
+          livros.splice(i, 1);
+        } else {
+          new_array.push(livros[i])
         }
+      }
 
-        _nextId += 1;
-          });
+      console.log('new_array', new_array)
     }
 
     function deletarLivro(botao_deletar)  {
