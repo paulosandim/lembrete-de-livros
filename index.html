@@ -9,6 +9,7 @@
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-datetimepicker.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -54,7 +55,7 @@
 
                 <div class="form-group">
                   <label for="paginas">Páginas</label>
-                  <input type="text" name="paginas" id="paginas_livro" class="form-control input-lg" placeholder="Quantidade de Páginas">
+                  <input type="number" name="paginas" id="paginas_livro" class="form-control input-lg" placeholder="Quantidade de Páginas">
                 </div>
 
                 <div class="form-group">
@@ -86,14 +87,35 @@
     </div><!--// .container -->
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="js/jquery-3.2.1.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
 
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script src="js/moment-with-locales.js"></script>
+    <script src="js/bootstrap-datetimepicker.js"></script>
     <script type="text/javascript">
 
     // Próximo ID para adicionar um novo livro
     var _nextId = 1;
+
+    $(document).ready(function() {
+
+
+    var livros = JSON.parse(localStorage.getItem('livros')) || [];
+
+    $("#tabelaLivro").append("<tbody></tbody>");
+
+    if(livros.length > 0) {
+
+      livros.forEach(function(livro) {
+
+        $("#tabelaLivro tbody").append(criarLinhaNaTabelaLivro(livro.id, livro.titulo, livro.paginas));
+
+        _nextId += 1;
+          });
+        }
+      });
+
     //  ID do livro que está sendo editado
     var _activeId = 0;
 
@@ -101,19 +123,20 @@
     function limpaCampo() {
       $("#titulo_livro").val("");
       $("#paginas_livro").val("");
+      $("#datetimepicker2").children('.form-control').val("");
     }
 
-    // Calendário para Lembretes
-    $(function () {
-                $('#datetimepicker2').datetimepicker({
-                    locale: 'pt-BR'
-                });
-            });
+    // Inicializa o calendário para Lembretes
+    $(function() {
+          $('#datetimepicker2').datetimepicker({
+          locale: 'pt-BR'
+          });
+      });
 
-    function criarLinhaNaTabelaLivro(id)  {
+    function criarLinhaNaTabelaLivro(id, titulo, paginas)  {
       var row = "<tr>" +
-      "<td>" + $("#titulo_livro").val() + "</td>" +
-      "<td>" + $("#paginas_livro").val() + "</td>" +
+      "<td>" + titulo + "</td>" +
+      "<td>" + paginas + "</td>" +
       "<td>" +
       "<button type='button' " +
               "onclick='editarLivro(this);' " +
@@ -139,10 +162,31 @@
       //  Primeiro verifica se <tbody> existe. Adiciona um caso não exista
       if ($("#tabelaLivro tbody").length == 0) {
         $("#tabelaLivro").append("<tbody></tbody>");
-      }
+      };
 
       //  Adcionando Livro na Tabela
-      $("#tabelaLivro tbody").append(criarLinhaNaTabelaLivro(_nextId));
+      $("#tabelaLivro tbody").append(criarLinhaNaTabelaLivro(_nextId, $("#titulo_livro").val(), $("#paginas_livro").val() ));
+      livros = [];
+
+      var livro = { id: _nextId, titulo: $("#titulo_livro").val(), paginas: $("#paginas_livro").val() }
+
+      if(localStorage.getItem('livros') != undefined || localStorage.getItem('livros') != null) {
+
+        if(JSON.parse(localStorage.getItem('livros')).length > 1 ) {
+
+          livros = JSON.parse(localStorage.getItem('livros'));
+        } else {
+
+          livros.push(JSON.parse(localStorage.getItem('livros')));
+        }
+
+        livros.push(livro);
+
+        localStorage.setItem('livros', JSON.stringify(livros));
+      } else {
+
+        localStorage.setItem('livros', JSON.stringify(livro));
+      }
 
       //  Incrementando o nextId
       _nextId += 1;
@@ -170,7 +214,7 @@
       var row = $("#tabelaLivro button[data-id='" + id + "']").parents("tr")[0];
 
       // Adiciona uma nova linha e modifica na tabela
-      $(row).after(criarLinhaNaTabelaLivro());
+      $(row).after(criarLinhaNaTabelaLivro(id, $("#titulo_livro").val(), $("#paginas_livro").val() ));
 
       $(row).remove();
 
