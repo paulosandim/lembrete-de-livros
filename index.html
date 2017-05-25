@@ -196,25 +196,33 @@
 
     function deletarLocalStorage(data_id) {
       var new_array = [];
+
       livros = JSON.parse(localStorage.getItem('livros'));
 
-      for(var i = 0; i <= livros.length; i++)  {
-        console.log(livros[0])
+      for(var i = 0; i < livros.length; i++)  {
+        console.log(data_id);
 
-        if (livros[i].id == data_id) {
-          livros.splice(i, 1);
-        } else {
-          new_array.push(livros[i])
+        if (livros[i].id !== data_id) {
+          new_array.push(livros[i]);
         }
+
+        if(new_array.length >= 1) {
+
+          localStorage.setItem('livros', JSON.stringify(new_array));
+        } else {
+          localStorage.clear();
+        }
+
       }
 
       console.log('new_array', new_array)
     }
 
     function deletarLivro(botao_deletar)  {
-      $(botao_deletar).parents("tr").remove();
+      var data_id = $(botao_deletar).data("id")
 
-      deletarLocalStorage();
+      $(botao_deletar).parents("tr").remove();
+      deletarLocalStorage(data_id);
     }
 
 
